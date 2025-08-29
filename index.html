@@ -29,9 +29,73 @@
       /* Custom styles to integrate the color palette */
       body {
         font-family: "Poppins", sans-serif;
-        background-color: #fdf0d5; /* Off-white */
+        background-color: white; /* Off-white */
         color: #003049; /* Dark Navy Blue */
       }
+
+      /* General styling for the container */
+      .mega-menu {
+        width: 80%;
+        position: fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 30;
+        top: 4.5rem;
+        transition: all 0.2s;
+      }
+      .footer-services {
+        background-color: #0a3a4ee8; /* Dark teal background */
+        color: #c5d5de; /* Light grey text color for list items */
+        font-family: Arial, sans-serif;
+        backdrop-filter: blur(5px);
+        display: flex;
+        justify-content: space-around; /* Distribute columns evenly */
+        padding: 40px 20px;
+        flex-wrap: wrap;
+        /* Allows columns to wrap on smaller screens */
+      }
+
+      /* Styling for each column */
+      .service-column {
+        flex: 1; /* Allows columns to grow and shrink */
+        min-width: 220px; /* Minimum width before wrapping */
+        padding: 0 15px; /* Spacing between columns */
+      }
+
+      /* Styling for the headings */
+      .service-column h3 {
+        color: #00a9e0; /* Bright cyan color for headings */
+        font-size: 1.1em;
+        margin-top: 0;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+
+      /* Styling for the lists */
+      .service-column ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0 0 25px 0; /* Margin below each list */
+      }
+
+      /* Styling for list items */
+      .service-column li {
+        margin-bottom: 10px;
+        font-size: 0.95em;
+      }
+
+      /* Styling for the links */
+      .service-column a {
+        color: inherit; /* Inherits the light grey color */
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+
+      /* Hover effect for the links */
+      .service-column a:hover {
+        color: #ffffff; /* Change color to white on hover */
+      }
+
       .bg-primary-red {
         background-color: #db2020;
       }
@@ -39,7 +103,7 @@
         background-color: #780000;
       }
       .bg-off-white {
-        background-color: #fdf0d5;
+        background-color: white;
       }
       .bg-dark-navy {
         background-color: #003049;
@@ -55,7 +119,7 @@
         color: #780000;
       }
       .text-off-white {
-        color: #fdf0d5;
+        color: white;
       }
       .text-dark-navy {
         color: #003049;
@@ -168,6 +232,9 @@
         /* Ensure content is visible above the background pseudo-element */
         z-index: 1;
       }
+      header {
+        background-color: white;
+      }
 
       .hero::before {
         /* Creates the pseudo-element */
@@ -234,6 +301,44 @@
   </head>
   <body class="antialiased">
     <!-- Header -->
+    <div class="hidden mega-menu">
+      <div class="footer-services">
+        <div class="service-column">
+          <h3>Software & IT Solutions</h3>
+          <ul>
+            <li><a href="#">Software Development</a></li>
+            <li><a href="#">Website Development</a></li>
+            <li><a href="#">System Integration & Migration</a></li>
+            <li><a href="#">24/7 Technical Support & Administration</a></li>
+          </ul>
+        </div>
+
+        <div class="service-column">
+          <h3>Marketing & Branding</h3>
+          <ul>
+            <li><a href="#">Digital Marketing</a></li>
+            <li><a href="#">Tailored Branding</a></li>
+            <li><a href="#">Reputation Management</a></li>
+            <li><a href="#">Attorney Marketing</a></li>
+          </ul>
+        </div>
+
+        <div class="service-column">
+          <h3>Talent & Training</h3>
+          <ul>
+            <li><a href="#">Staffing</a></li>
+            <li><a href="#">Learning & Development</a></li>
+          </ul>
+
+          <h3>Globalization Services</h3>
+          <ul>
+            <li>
+              <a href="#">Internationalization, Localization & Translation</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <header
       id="header"
       class="bg-off-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm"
@@ -243,14 +348,17 @@
       >
         <!-- Logo -->
         <a href="#" class="flex items-center space-x-2">
-          <img src="logo.png" alt="iBCSCorp Logo" class="h-10" />
+          <img src="logo.svg" alt="iBCSCorp Logo" class="h-10" />
         </a>
 
         <!-- Desktop Menu -->
         <div
           class="hidden lg:flex items-center space-x-6 text-dark-navy font-medium"
         >
-          <a href="#services" class="hover:text-primary-red transition-colors"
+          <a
+            id="services-desk"
+            href="#services"
+            class="hover:text-primary-red transition-colors"
             >Services</a
           >
           <a href="#about" class="hover:text-primary-red transition-colors"
@@ -325,6 +433,7 @@
       <!-- Mobile Menu -->
       <div id="mobile-menu" class="hidden lg:hidden px-6 pb-4 space-y-3">
         <a
+          id="services"
           href="#services"
           class="block hover:text-primary-red transition-colors"
           >Services</a
@@ -986,6 +1095,8 @@
       // Mobile menu toggle
       const mobileMenuButton = document.getElementById("mobile-menu-button");
       const mobileMenu = document.getElementById("mobile-menu");
+      const megaMenu = document.querySelector(".mega-menu");
+      const servicesNav = document.querySelector("#services-desk");
 
       mobileMenuButton.addEventListener("click", () => {
         mobileMenu.classList.toggle("hidden");
@@ -997,6 +1108,14 @@
         link.addEventListener("click", () => {
           mobileMenu.classList.add("hidden");
         });
+      });
+
+      servicesNav.addEventListener("mouseenter", () => {
+        megaMenu.classList.remove("hidden");
+      });
+
+      megaMenu.addEventListener("mouseleave", () => {
+        megaMenu.classList.add("hidden");
       });
     </script>
   </body>
